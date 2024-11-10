@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "travel_package")
-public class TravelPackage {
+public class TravelPackageModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
