@@ -7,6 +7,12 @@
 <body>
     <h1>Pacotes de Viagem</h1>
 
+    <div>
+        <a th:href="@{/filter(type='Nacional')}">Nacionais</a>
+        <a th:href="@{/filter(type='Internacional')}">Internacionais</a>
+    </div>
+
+    <h2>Todos os Pacotes</h2>
     <table border="1">
         <thead>
             <tr>
@@ -14,6 +20,7 @@
                 <th>Tipo</th>
                 <th>Preço</th>
                 <th>Descrição</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +29,10 @@
                 <td th:text="${package.type}"></td>
                 <td th:text="${package.price}"></td>
                 <td th:text="${package.description}"></td>
+                <td>
+                    <!-- Botão Ver mais -->
+                    <a th:href="@{/package-details(id=${package.id})}">Ver mais</a>
+                </td>
             </tr>
         </tbody>
     </table>
