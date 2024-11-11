@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pacotes de Viagem</title>
+</head>
+<body>
+    <h1>Pacotes de Viagem</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="package : ${travelPackages}">
+                <td th:text="${package.name}"></td>
+                <td th:text="${package.type}"></td>
+                <td th:text="${package.price}"></td>
+                <td th:text="${package.description}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
