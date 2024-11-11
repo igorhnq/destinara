@@ -32,4 +32,11 @@ public class TravelPackageController {
         model.addAttribute("travelPackages", filteredPackages);
         return "index";
     }
+
+    @GetMapping("/package-details")
+    public String showPackageDetails(@RequestParam Integer id, Model model) {
+        TravelPackageModel travelPackage = travelPackageRepository.findById(id).orElse(null);
+        model.addAttribute("travelPackage",travelPackage);
+        return "package-details";
+    }
 }
