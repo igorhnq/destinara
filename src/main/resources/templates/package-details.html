@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Pacote</title>
+</head>
+<body>
+    <h1>Detalhes do Pacote</h1>
+
+    <div th:if="${travelPackage != null}">
+        <p><strong>Nome:</strong> <span th:text="${travelPackage.name}"></span></p>
+        <p><strong>Tipo:</strong> <span th:text="${travelPackage.type}"></span></p>
+        <p><strong>Preço:</strong> <span th:text="${travelPackage.price}"></span></p>
+        <p><strong>Descrição:</strong> <span th:text="${travelPackage.description}"></span></p>
+    </div>
+
+    <div th:if="${travelPackage == null}">
+        <p>Pacote não encontrado.</p>
+    </div>
+
+    <a href="/travel-packages">Voltar para a lista</a>
+</body>
+</html>
