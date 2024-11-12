@@ -6,6 +6,16 @@ CREATE TABLE travel_package (
     description TEXT
 );
 
+CREATE TABLE app_user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) NOT NULL,
+    birth_date DATE NOT NULL,
+    sex CHAR(1) NOT NULL,
+    email VARCHAR(100),
+    password VARCHAR(25) NOT NULL
+);
+
 INSERT INTO travel_package (name, type, price, description) VALUES
 ('Manaus, AM', 'Nacional', 1500, 'Pacote Manaus show de bola');
 
