@@ -19,7 +19,6 @@
                 <th>Nome</th>
                 <th>Tipo</th>
                 <th>Preço</th>
-                <th>Descrição</th>
                 <th>Ação</th>
             </tr>
         </thead>
@@ -28,9 +27,7 @@
                 <td th:text="${package.name}"></td>
                 <td th:text="${package.type}"></td>
                 <td th:text="${package.price}"></td>
-                <td th:text="${package.description}"></td>
                 <td>
-                    <!-- Botão Ver mais -->
                     <a th:href="@{/package-details(id=${package.id})}">Ver mais</a>
                 </td>
             </tr>
