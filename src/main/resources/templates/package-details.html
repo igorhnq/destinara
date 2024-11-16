@@ -12,6 +12,7 @@
         <p><strong>Tipo:</strong> <span th:text="${travelPackage.type}"></span></p>
         <p><strong>Preço:</strong> <span th:text="${travelPackage.price}"></span></p>
         <p><strong>Descrição:</strong> <span th:text="${travelPackage.description}"></span></p>
+        <a th:href="@{/buy-package(packageId=${travelPackage.id})}">Comprar</a>
     </div>
 
     <div th:if="${travelPackage == null}">
