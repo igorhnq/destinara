@@ -16,6 +16,14 @@ CREATE TABLE app_user (
     password VARCHAR(25) NOT NULL
 );
 
+CREATE TABLE purchase (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    travel_package_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES app_user(id),
+    FOREIGN KEY (travel_package_id) REFERENCES travel_package(id)
+);
+
 INSERT INTO travel_package (name, type, price, description) VALUES
 ('Manaus, AM', 'Nacional', 1500, 'Pacote Manaus show de bola');
 
