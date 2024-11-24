@@ -1,10 +1,10 @@
 package br.com.destinara.controller;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import br.com.destinara.model.AppUserModel;
 import br.com.destinara.repository.AppUserRepository;
 
@@ -12,9 +12,11 @@ import br.com.destinara.repository.AppUserRepository;
 public class AppUserController {
 
     private final AppUserRepository appUserRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public AppUserController(AppUserRepository appUserRepository) {
+    public AppUserController(AppUserRepository appUserRepository, PasswordEncoder passwordEncoder) {
         this.appUserRepository = appUserRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")
@@ -24,6 +26,7 @@ public class AppUserController {
 
     @PostMapping("/register")
     public String registerUser(AppUserModel user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         appUserRepository.save(user);
         return "register";
     }
@@ -35,13 +38,7 @@ public class AppUserController {
 
     @PostMapping("/login")
     public String loginUser(String email, String password, Model model) {
-        AppUserModel user = appUserRepository.findByEmailAndPassword(email, password).orElse(null);
+    return "login";
+}
 
-        if (user != null) {
-            return "redirect:/filter?type=Nacional";
-        } else {
-            model.addAttribute("error", "Email ou senha inválidos");
-            return "login";
-        }
-    }
 }
