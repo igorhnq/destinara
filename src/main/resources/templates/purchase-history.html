@@ -14,6 +14,8 @@
     <p><strong>Sexo:</strong> <span th:text="${user.sex}"></span></p>
     <p><strong>Data de Nascimento:</strong> <span th:text="${user.birthDate}"></span></p>
 
+    <a th:href="@{/edit-user}" class="btn">Editar Dados</a>
+
     <div th:if="${purchases != null and !purchases.isEmpty()}">
         <h3>Histórico de Compras</h3>
         <table border="1">
