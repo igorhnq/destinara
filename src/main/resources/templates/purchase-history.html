@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico de Compras</title>
+</head>
+<body>
+    <h1>Histórico de Compras</h1>
+
+    <div th:if="${purchases != null and !purchases.isEmpty()}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome do Pacote</th>
+                    <th>Tipo</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="purchase : ${purchases}">
+                    <td th:text="${purchase.travelPackage.name}"></td>
+                    <td th:text="${purchase.travelPackage.type}"></td>
+                    <td th:text="${purchase.travelPackage.price}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${purchases == null or purchases.isEmpty()}">
+        <p>Você ainda não fez nenhuma compra.</p>
+    </div>
+
+    <a href="/travel-packages">Voltar para a lista de pacotes</a>
+</body>
+</html>
