@@ -35,15 +35,17 @@ public class TravelPackageController {
     public String viewPurchaseHistory(Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         AppUserModel user = appUserRepository.findByEmail(userDetails.getUsername()).orElse(null);
-
+    
         if (user != null) {
+            model.addAttribute("user", user);
+    
             List<PurchaseModel> purchases = purchaseRepository.findByUser(user);
             model.addAttribute("purchases", purchases);
         }
-
+    
         return "purchase-history"; 
     }
-
+    
     @GetMapping("/travel-packages")
     public String showPackages(Model model) {
         List<TravelPackageModel> travelPackageModels = travelPackageRepository.findAll();

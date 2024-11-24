@@ -7,7 +7,15 @@
 <body>
     <h1>Histórico de Compras</h1>
 
+    <h2>Dados do Usuário</h2>
+    <p><strong>Nome:</strong> <span th:text="${user.name}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+    <p><strong>CPF:</strong> <span th:text="${user.cpf}"></span></p>
+    <p><strong>Sexo:</strong> <span th:text="${user.sex}"></span></p>
+    <p><strong>Data de Nascimento:</strong> <span th:text="${user.birthDate}"></span></p>
+
     <div th:if="${purchases != null and !purchases.isEmpty()}">
+        <h3>Histórico de Compras</h3>
         <table border="1">
             <thead>
                 <tr>
