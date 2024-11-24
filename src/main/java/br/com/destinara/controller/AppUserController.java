@@ -39,6 +39,5 @@ public class AppUserController {
     @PostMapping("/login")
     public String loginUser(String email, String password, Model model) {
     return "login";
-}
-
+    }
 }
