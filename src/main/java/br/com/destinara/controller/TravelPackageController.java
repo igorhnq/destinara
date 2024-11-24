@@ -1,22 +1,34 @@
 package br.com.destinara.controller;
 
+import br.com.destinara.model.AppUserModel;
+import br.com.destinara.model.PurchaseModel;
+import br.com.destinara.model.TravelPackageModel;
+import br.com.destinara.repository.AppUserRepository;
+import br.com.destinara.repository.PurchaseRepository;
+import br.com.destinara.repository.TravelPackageRepository;
+
 import java.util.List;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.com.destinara.model.TravelPackageModel;
-import br.com.destinara.repository.TravelPackageRepository;
-
 @Controller
 public class TravelPackageController {
-    
-    private final TravelPackageRepository travelPackageRepository;
 
-    public TravelPackageController(TravelPackageRepository travelPackageRepository) {
+    private final TravelPackageRepository travelPackageRepository;
+    private final AppUserRepository appUserRepository;
+    private final PurchaseRepository purchaseRepository;
+
+    public TravelPackageController(TravelPackageRepository travelPackageRepository, 
+                                   AppUserRepository appUserRepository, 
+                                   PurchaseRepository purchaseRepository) {
         this.travelPackageRepository = travelPackageRepository;
+        this.appUserRepository = appUserRepository;
+        this.purchaseRepository = purchaseRepository;
     }
 
     @GetMapping("/travel-packages")
@@ -36,7 +48,27 @@ public class TravelPackageController {
     @GetMapping("/package-details")
     public String showPackageDetails(@RequestParam Integer id, Model model) {
         TravelPackageModel travelPackage = travelPackageRepository.findById(id).orElse(null);
-        model.addAttribute("travelPackage",travelPackage);
+        model.addAttribute("travelPackage", travelPackage);
         return "package-details";
+    }
+
+    @GetMapping("/buy-package")
+    public String buyPackage(@RequestParam Integer packageId, Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        AppUserModel user = appUserRepository.findByEmail(userDetails.getUsername()).orElse(null);
+
+        if (user != null) {
+            TravelPackageModel travelPackage = travelPackageRepository.findById(packageId).orElse(null);
+            if (travelPackage != null) {
+                PurchaseModel purchase = new PurchaseModel();
+                purchase.setUser(user);
+                purchase.setTravelPackage(travelPackage);
+                purchaseRepository.save(purchase);
+                
+                model.addAttribute("message", "Compra realizada com sucesso!");
+            }
+        }
+
+        return "purchase-success";
     }
 }
