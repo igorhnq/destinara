@@ -1,5 +1,7 @@
 package br.com.destinara.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,5 +41,36 @@ public class AppUserController {
     @PostMapping("/login")
     public String loginUser(String email, String password, Model model) {
     return "login";
+    }
+
+    @GetMapping("/edit-user")
+    public String showEditUserPage(Model model) {
+
+    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    AppUserModel user = appUserRepository.findByEmail(userDetails.getUsername()).orElse(null);
+
+    if (user != null) {
+        model.addAttribute("user", user);
+        return "edit-user";
+    }
+        return "redirect:/purchase-history";
+    }
+
+    @PostMapping("/update-user")
+    public String updateUser(AppUserModel updatedUser) {
+
+    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    AppUserModel currentUser = appUserRepository.findByEmail(userDetails.getUsername()).orElse(null);
+
+    if (currentUser != null) {
+        currentUser.setName(updatedUser.getName());
+        currentUser.setEmail(updatedUser.getEmail());
+        currentUser.setCpf(updatedUser.getCpf());
+        currentUser.setBirthDate(updatedUser.getBirthDate());
+        currentUser.setSex(updatedUser.getSex());
+
+        appUserRepository.save(currentUser);
+    }
+        return "redirect:/purchase-history"; 
     }
 }
