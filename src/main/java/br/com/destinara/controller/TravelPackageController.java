@@ -57,7 +57,7 @@ public class TravelPackageController {
     public String filterByType(@RequestParam String type, Model model) {
         List<TravelPackageModel> filteredPackages = travelPackageRepository.findByType(type);
         model.addAttribute("travelPackages", filteredPackages);
-        return "index";
+        return "packages";
     }
 
     @GetMapping("/package-details")
