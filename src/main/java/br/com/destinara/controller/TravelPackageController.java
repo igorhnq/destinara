@@ -31,6 +31,21 @@ public class TravelPackageController {
         this.purchaseRepository = purchaseRepository;
     }
 
+    @GetMapping("/purchase-history")
+    public String viewPurchaseHistory(Model model) {
+        // Obtendo o usuário logado
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        AppUserModel user = appUserRepository.findByEmail(userDetails.getUsername()).orElse(null);
+
+        if (user != null) {
+            // Buscando as compras feitas por esse usuário
+            List<PurchaseModel> purchases = purchaseRepository.findByUser(user);
+            model.addAttribute("purchases", purchases);
+        }
+
+        return "purchase-history"; // Página que exibirá o histórico
+    }
+
     @GetMapping("/travel-packages")
     public String showPackages(Model model) {
         List<TravelPackageModel> travelPackageModels = travelPackageRepository.findAll();
