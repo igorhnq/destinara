@@ -6,6 +6,11 @@
     box-sizing: border-box;
 }
 
+.register {
+    margin-top: 20px;
+    color: #7DDADD;
+}
+
 body {
     font-family: "Poppins", sans-serif;
     display: flex;
