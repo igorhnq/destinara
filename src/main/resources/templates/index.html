@@ -1,38 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Pacotes de Viagem</title>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
 </head>
 <body>
-    <h1>Pacotes de Viagem</h1>
-
-    <div>
-        <a th:href="@{/filter(type='Nacional')}">Nacionais</a>
-        <a th:href="@{/filter(type='Internacional')}">Internacionais</a>
-    </div>
-
-    <h2>Todos os Pacotes</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Preço</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="package : ${travelPackages}">
-                <td th:text="${package.name}"></td>
-                <td th:text="${package.type}"></td>
-                <td th:text="${package.price}"></td>
-                <td>
-                    <a th:href="@{/package-details(id=${package.id})}">Ver mais</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="/logout">Logout</a>
+    <main>
+        <h1>Bem-vindo</h1>
+        <a href="">Login</a>
+        <a href="">Cadastro?</a>
+    </main>
 </body>
 </html>
