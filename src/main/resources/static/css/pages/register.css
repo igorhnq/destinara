@@ -13,6 +13,11 @@ body {
     background-color: #DBDBDB;
 }
 
+.login {
+    color: #7DDADD;
+    margin-top: 20px;
+}
+
 .container {
     display: grid;
     grid-template-columns: 30% 70%;
