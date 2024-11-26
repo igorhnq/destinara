@@ -21,5 +21,6 @@ public class TravelPackageModel {
     private String name;
     private String type;
     private BigDecimal price;
-    private String description;
+    private String paragraph1;
+    private String paragraph2;
 }
