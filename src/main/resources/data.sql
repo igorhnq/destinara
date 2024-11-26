@@ -3,7 +3,8 @@ CREATE TABLE travel_package (
     name VARCHAR(100) NOT NULL,
     type VARCHAR(50) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    description TEXT
+    paragraph1 TEXT,
+    paragraph2 TEXT
 );
 
 CREATE TABLE app_user (
@@ -24,26 +25,26 @@ CREATE TABLE purchase (
     FOREIGN KEY (travel_package_id) REFERENCES travel_package(id)
 );
 
-INSERT INTO travel_package (name, type, price, description) VALUES
-('Manaus, AM', 'Nacional', 1500, 'Pacote Manaus show de bola');
+INSERT INTO travel_package (name, type, price, paragraph1, paragraph2) VALUES
+('Manaus, AM', 'Nacional', 1500, 'PARAGRAPHO1', 'PARAGRAHO2');
 
-INSERT INTO travel_package (name, type, price, description) VALUES
-('Foz do Iguacu, PR', 'Nacional', 1000, 'Pacote Foz do Iguaçu show de bola');
+INSERT INTO travel_package (name, type, price, paragraph1, paragraph2) VALUES
+('Foz do Iguacu, PR', 'Nacional', 1000, 'Pacote Foz do Iguaçu show de bola', 'PARAGRAHO2');
 
-INSERT INTO travel_package (name, type, price, description) VALUES
-('Salvador, BA', 'Nacional', 1500, 'Pacote Salvador show de bola');
+INSERT INTO travel_package (name, type, price, paragraph1, paragraph2) VALUES
+('Salvador, BA', 'Nacional', 1500, 'Pacote Salvador show de bola', 'PARAGRAHO2');
 
-INSERT INTO travel_package (name, type, price, description) VALUES
-('Gramado, RS', 'Nacional', 1500, 'Pacote Gramado show de bola');
+INSERT INTO travel_package (name, type, price, paragraph1, paragraph2) VALUES
+('Gramado, RS', 'Nacional', 1500, 'Pacote Gramado show de bola', 'PARAGRAHO2');
 
-INSERT INTO travel_package (name, type, price, description) VALUES
-('BALI, Indonesia', 'Internacional', 4000, 'Pacote BALI show de bola');
+INSERT INTO travel_package (name, type, price, paragraph1, paragraph2) VALUES
+('BALI, Indonesia', 'Internacional', 4000, 'Pacote BALI show de bola', 'PARAGRAHO2');
 
-INSERT INTO travel_package (name, type, price, description) VALUES
-('Toquio, Japao', 'Internacional', 3800, 'Pacote Japao show de bola');
+INSERT INTO travel_package (name, type, price, paragraph1, paragraph2) VALUES
+('Toquio, Japao', 'Internacional', 3800, 'Pacote Japao show de bola', 'PARAGRAHO2');
 
-INSERT INTO travel_package (name, type, price, description) VALUES
-('Vik, Islandia', 'Internacional', 10000, 'Pacote Vik show de bola');
+INSERT INTO travel_package (name, type, price, paragraph1, paragraph2) VALUES
+('Vik, Islandia', 'Internacional', 10000, 'Pacote Vik show de bola', 'PARAGRAHO2');
 
-INSERT INTO travel_package (name, type, price, description) VALUES
-('Santorini, Grecia', 'Internacional', 6900, 'Pacote Santorini show de bola');
+INSERT INTO travel_package (name, type, price, paragraph1, paragraph2) VALUES
+('Santorini, Grecia', 'Internacional', 6900, 'Pacote Santorini show de bola', 'PARAGRAHO2');
