@@ -2,37 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Pacotes de Viagem</title>
+    <title>Detalhes do Pacote</title>
+    <link rel="stylesheet" th:href="@{/css/pages/packages.css}">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
-    <h1>Pacotes de Viagem</h1>
-    <div>
-        <a th:href="@{/filter(type='Nacional')}">Nacionais</a>
-        <a th:href="@{/filter(type='Internacional')}">Internacionais</a>
+    <div class="container">
+        <header>
+            <div>
+                <img th:src="@{/img/blue-logo.png}" class="logo">
+                <h1>PACOTE DE VIAGENS</h1>
+            </div>
+            <a href="/purchase-history">
+                <i class="ph-bold ph-user user-icon"></i>
+            </a>
+        </header>
+        <nav>
+            <div>
+                <button>
+                    <a th:href="@{/filter(type='Nacional')}">NACIONAL</a>
+                </button>
+                <button>
+                    <a th:href="@{/filter(type='Internacional')}">INTERNACIONAL</a>
+                </button>
+            </div>
+        </nav>
+        <section>
+            <div th:each="package : ${travelPackages}" class="package-card" 
+                 th:style="'background-image: url(\'/img/travel-packages/' + ${package.name} + '.png\');'">
+                <p th:text="${package.name}"></p>
+                <a th:href="@{/package-details(id=${package.id})}">Ver mais</a>
+            </div>
+        </section>
     </div>
-
-    <h2>Todos os Pacotes</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Preço</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="package : ${travelPackages}">
-                <td th:text="${package.name}"></td>
-                <td th:text="${package.type}"></td>
-                <td th:text="${package.price}"></td>
-                <img th:src="@{'/img/travel-packages/' + ${package.name} + '.png' }">
-                <td>
-                    <a th:href="@{/package-details(id=${package.id})}">Ver mais</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="/logout">Logout</a>
 </body>
 </html>

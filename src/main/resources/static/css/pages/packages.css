@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #DBDBDB;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    width: 80%;
+    height: 85%;
+    background-color: #FFFFFF;
+    border-radius: 2rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container header div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+h1 {
+    color: #5bb8bb;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.logo {
+    width: 150px;
+    height: 145px;
+}
+
+.user-icon {
+    font-size: 3rem;
+    color: gray;
+}
+
+nav div {
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 2rem;
+    align-items: center;
+    gap: 0;
+}
+
+nav div button:first-child {
+    border-top-left-radius: 20px; 
+    border-bottom-left-radius: 20px;
+}
+
+nav div button:last-child {
+    border-top-right-radius: 20px; 
+    border-bottom-right-radius: 20px;
+}
+
+nav div button {
+    flex: 1;
+    border: 2px solid #7ddadd;
+    color: #7ddadd;
+    background-color: #FFFFFF;
+}
+
+nav div button .active {
+    background-color: #7ddadd;
+    color: #FFFFFF;
+}
+
+button:hover {
+    background-color: #b3e3e4;
+}
+
+nav div button a {
+    display: block;
+    padding: 1rem;
+    color: #7ddadd;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+nav div button:hover {
+    background-color: #b3e3e4;
+    cursor: pointer;
+}
+
+section {
+    display: flex;
+    gap: 1.6rem;
+    flex-grow: 1;
+}
+
+section div p {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+}
+
+section div a {
+    text-align: center;
+    width: 60%;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    border: 2px solid #FFFFFF;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #ffffff17;
+}
+
+.package-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center;
+    border-radius: 2rem;
+
+    width: 25%;
+    height: 100%;
+
+    position: relative;
+    color: white; 
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+.package-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(102, 100, 100, 0.274);
+    border-radius: 2rem;
+    z-index: 1;
+}
+
+.package-card > * {
+    position: relative;
+    z-index: 2;
+}
+
