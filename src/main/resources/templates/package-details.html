@@ -10,25 +10,25 @@
     <div class="container">
         <header>
             <div>
-                <i class="ph ph-arrow-left user-icon"></i>
-                <h1>NOME DO PACOTE</h1>
+                <a th:href="@{/filter(type=${travelPackage.type})}">
+                    <i class="ph ph-arrow-left user-icon"></i>
+                </a>
+                <h1 th:text="${travelPackage.name}"></h1>
                 <a href="/purchase-history">
                     <i class="ph-bold ph-user user-icon"></i>
                 </a>
             </div>
         </header>
-        <section>
-            <div class="package-card">
-                <p>teste</p>
+        <section th:if="${travelPackage != null}">
+            <div class="package-card" th:style="'background-image: url(\'/img/travel-packages/' + ${travelPackage.name} + '.png\');'"></div>
+            <div class="package-text">
+                <p th:text="${travelPackage.paragraph1}"></p>
+                <p th:text="${travelPackage.paragraph2}"></p>
+                <button>
+                    <a th:href="@{/buy-package(packageId=${travelPackage.id})}">Comprar</a>
+                </button>
             </div>
-                <div class="package-text">
-                    <p>Foz do Iguaçu, localizada na tríplice fronteira entre Brasil, Argentina e Paraguai, é famosa pelas Cataratas do Iguaçu, um conjunto de 275 quedas d'água. A cidade também abriga a Usina de Itaipu, uma das maiores hidrelétricas do mundo, e o Parque das Aves, onde é possível ver aves nativas da Mata Atlântica. Outra atração popular é o Marco das Três Fronteiras, onde os rios Iguaçu e Paraná dividem os países.</p>
-                    <p>Os pacotes turísticos costumam incluir visitas às cataratas (tanto pelo lado brasileiro quanto pelo argentino), passeios de barco, e até sobrevoos de helicóptero. Um pacote de 4 dias custa entre R$ 1.500 e R$ 3.000, incluindo hospedagem e transporte.</p>
-                    <button>
-                        <a href="">teste</a>
-                    </button>
-                </div>
-        </section>
+        </section>        
         <footer>
         </footer>
     </div>
