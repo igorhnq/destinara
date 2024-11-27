@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <link rel="stylesheet" th:href="@{/css/pages/purchase-history.css}">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Histórico de Compras</title>
@@ -50,7 +51,10 @@
         </section>
         <div class="horizontal-line"></div>
         <section class="history-section">
-            <h2>Histórico</h2>
+            <div class="history-header">
+                <h2>Histórico</h2>
+                <a href="/sales-chart">GRÁFICO</a>
+            </div>
             <div class="cards">
                 <div th:each="purchase : ${purchases}" 
                      th:style="'background-image: url(\'/img/travel-packages/' + ${purchase.travelPackage.name} + '.png\');'" 

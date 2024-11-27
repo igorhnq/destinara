@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráfico de Vendas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gráfico de Pacotes Mais Vendidos</h1>
+        </header>
+
+        <!-- Seção do gráfico -->
+        <div>
+            <h2>Pacotes Mais Vendidos</h2>
+            <canvas id="salesChart" width="400" height="200"></canvas>
+        </div>
+
+        <footer>
+            <a href="/purchase-history">Voltar para o Histórico de Compras</a>
+        </footer>
+    </div>
+
+    <script th:inline="javascript">
+        /* Dados do gráfico passados pelo modelo */
+        const topPackages = /*[[${topPackages}]]*/ [];  // A variável topPackages vem do controller
+    
+        const labels = topPackages.map(item => item[0]); // Nomes dos pacotes
+        const data = topPackages.map(item => item[1]);   // Quantidades vendidas
+    
+        // Criando o gráfico com Chart.js
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'bar',  // Tipo de gráfico (pode ser 'bar', 'line', etc.)
+            data: {
+                labels: labels,  // Nomes dos pacotes
+                datasets: [{
+                    label: 'Quantidade Vendida',
+                    data: data,  // Quantidade vendida de cada pacote
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor de fundo das barras
+                    borderColor: 'rgba(75, 192, 192, 1)', // Cor da borda das barras
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
