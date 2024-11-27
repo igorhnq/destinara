@@ -52,6 +52,9 @@
                      class="package-card">
                     <p th:text="${purchase.travelPackage.name}"></p>
                 </div>
+                <div class="empty-history" th:if="${purchases == null or purchases.isEmpty()}">
+                    <h2>Você ainda não fez nenhuma compra.</h2>
+                </div>
             </div>            
         </section>
     </div>
