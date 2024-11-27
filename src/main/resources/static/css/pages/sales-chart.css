@@ -17,6 +17,11 @@ body {
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
 
     width: 80%;
     height: 85%;
@@ -24,6 +29,56 @@ body {
     border-radius: 2rem;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     padding: 2.5rem;
+}
+
+.ph-arrow-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 40px;
+    margin-left: 2rem;
+}
+
+.flex {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo {
+    width: 150px;
+    height: 145px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.graph {
+    margin: 1rem 0 1rem;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 75%;
+}
+
+.user-icon {
+    font-size: 3rem;
+    color: gray;
+}
+
+h1 {
+    color: #5bb8bb;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.teste-insano {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #salesChart {
