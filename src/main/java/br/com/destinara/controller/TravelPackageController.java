@@ -69,21 +69,22 @@ public class TravelPackageController {
 
     @GetMapping("/buy-package")
     public String buyPackage(@RequestParam Integer packageId, Model model) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        AppUserModel user = appUserRepository.findByEmail(userDetails.getUsername()).orElse(null);
+    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    AppUserModel user = appUserRepository.findByEmail(userDetails.getUsername()).orElse(null);
 
-        if (user != null) {
-            TravelPackageModel travelPackage = travelPackageRepository.findById(packageId).orElse(null);
-            if (travelPackage != null) {
-                PurchaseModel purchase = new PurchaseModel();
-                purchase.setUser(user);
-                purchase.setTravelPackage(travelPackage);
-                purchaseRepository.save(purchase);
-                
-                model.addAttribute("message", "Compra realizada com sucesso!");
-            }
+    if (user != null) {
+        TravelPackageModel travelPackage = travelPackageRepository.findById(packageId).orElse(null);
+        if (travelPackage != null) {
+            PurchaseModel purchase = new PurchaseModel();
+            purchase.setUser(user);
+            purchase.setTravelPackage(travelPackage);
+            purchaseRepository.save(purchase);
+            
+            model.addAttribute("purchaseSuccess", true);
+            model.addAttribute("travelPackage", travelPackage);
         }
-
-        return "purchase-success";
     }
+
+    return "package-details";
+}
 }
