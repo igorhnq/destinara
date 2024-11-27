@@ -106,8 +106,15 @@ header {
     gap: 1rem;
 }
 
-.ph-arrow-left {
-    display: inline-block
+.teste i {
+    font-size: 3rem;
+}
+
+.teste {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 5rem;
 }
 
 .history-section {
