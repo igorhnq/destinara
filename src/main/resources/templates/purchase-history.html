@@ -1,45 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" th:href="@{/css/pages/purchase-history.css}">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 <head>
     <meta charset="UTF-8">
     <title>Histórico de Compras</title>
 </head>
 <body>
-    <h1>Histórico de Compras</h1>
+    <div class="container">
+        <a href="/filter?type=Internacional">
+            <i class="ph ph-arrow-left user-icon"></i>
+        </a>
+        <header>
+            <h1>Seu perfil</h1>
+        </header>
+        <section class="user-info">
+            <div class="user-info-container">
+                <div class="input-wrapper">
+                    <i class="ph-bold ph-user"></i>
+                    <input type="text" th:placeholder="${user.name}" disabled>
+                </div>
 
-    <h2>Dados do Usuário</h2>
-    <p><strong>Nome:</strong> <span th:text="${user.name}"></span></p>
-    <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
-    <p><strong>CPF:</strong> <span th:text="${user.cpf}"></span></p>
-    <p><strong>Sexo:</strong> <span th:text="${user.sex}"></span></p>
-    <p><strong>Data de Nascimento:</strong> <span th:text="${user.birthDate}"></span></p>
+                <div class="input-wrapper">
+                    <i class="ph-bold ph-file-text"></i>
+                    <input type="text" th:placeholder="${user.cpf}" disabled>
+                </div>
 
-    <a th:href="@{/edit-user}" class="btn">Editar Dados</a>
+                <div class="input-wrapper-flex">
+                    <div class="input-wrapper">
+                        <i class="ph-bold ph-calendar"></i>
+                        <input type="text" th:placeholder="${user.birthDate}" disabled>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="ph-bold ph-gender-intersex"></i>
+                        <input type="text" th:placeholder="${user.sex}" disabled>
+                    </div>
+                </div>
 
-    <div th:if="${purchases != null and !purchases.isEmpty()}">
-        <h3>Histórico de Compras</h3>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nome do Pacote</th>
-                    <th>Tipo</th>
-                    <th>Preço</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="purchase : ${purchases}">
-                    <td th:text="${purchase.travelPackage.name}"></td>
-                    <td th:text="${purchase.travelPackage.type}"></td>
-                    <td th:text="${purchase.travelPackage.price}"></td>
-                </tr>
-            </tbody>
-        </table>
+                <div class="input-wrapper">
+                    <i class="ph-bold ph-envelope-simple"></i>
+                    <input type="text" th:placeholder="${user.email}" disabled>
+                </div>
+            </div>
+        </section>
+        <div class="horizontal-line"></div>
+        <section class="history-section">
+            <h2>Histórico</h2>
+            <div class="cards">
+                <div th:each="purchase : ${purchases}" 
+                     th:style="'background-image: url(\'/img/travel-packages/' + ${purchase.travelPackage.name} + '.png\');'" 
+                     class="package-card">
+                    <p th:text="${purchase.travelPackage.name}"></p>
+                </div>
+            </div>            
+        </section>
     </div>
-
-    <div th:if="${purchases == null or purchases.isEmpty()}">
-        <p>Você ainda não fez nenhuma compra.</p>
-    </div>
-
-    <a th:href="@{/filter(type='Nacional')}">Voltar para os Pacotes</a>
 </body>
 </html>
