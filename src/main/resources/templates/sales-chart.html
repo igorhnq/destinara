@@ -22,22 +22,21 @@
 
     <script th:inline="javascript">
         /* Dados do gráfico passados pelo modelo */
-        const topPackages = /*[[${topPackages}]]*/ [];  // A variável topPackages vem do controller
+        const topPackages = /*[[${topPackages}]]*/ []; 
     
-        const labels = topPackages.map(item => item[0]); // Nomes dos pacotes
-        const data = topPackages.map(item => item[1]);   // Quantidades vendidas
+        const labels = topPackages.map(item => item[0]); 
+        const data = topPackages.map(item => item[1]); 
     
-        // Criando o gráfico com Chart.js
         const ctx = document.getElementById('salesChart').getContext('2d');
         const salesChart = new Chart(ctx, {
-            type: 'bar',  // Tipo de gráfico (pode ser 'bar', 'line', etc.)
+            type: 'bar',
             data: {
-                labels: labels,  // Nomes dos pacotes
+                labels: labels, 
                 datasets: [{
                     label: 'Quantidade Vendida',
-                    data: data,  // Quantidade vendida de cada pacote
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor de fundo das barras
-                    borderColor: 'rgba(75, 192, 192, 1)', // Cor da borda das barras
+                    data: data, 
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', 
+                    borderColor: 'rgba(75, 192, 192, 1)', 
                     borderWidth: 1
                 }]
             },
