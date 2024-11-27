@@ -5,6 +5,7 @@
     <title>Histórico de Compras</title>
     <link rel="stylesheet" th:href="@{/css/pages/package-details.css}">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
@@ -32,5 +33,21 @@
         <footer>
         </footer>
     </div>
+    <script th:if="${purchaseSuccess}">
+    Swal.fire({
+        html: '<h2 style="color: white;">Compra Concluída!</h2><p style="color: white;">Sua compra foi realizada com sucesso.</p>',
+        icon: 'success',
+        confirmButtonText: 'HISTÓRICO',
+        showCancelButton: false,
+        focusConfirm: false,
+        iconColor: '#ffffff',
+        confirmButtonColor: '#5BB8BB',
+        background: '#5BB8BB',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/purchase-history';
+        }
+    });
+</script>
 </body>
 </html>
