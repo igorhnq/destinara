@@ -45,6 +45,15 @@ public class TravelPackageController {
     
         return "purchase-history"; 
     }
+
+    @GetMapping("/sales-chart")
+    public String showSalesChart(Model model) {
+    List<Object[]> topPackages = purchaseRepository.findTopSellingPackages();
+    
+    model.addAttribute("topPackages", topPackages);
+
+        return "sales-chart";  
+    }
     
     @GetMapping("/travel-packages")
     public String showPackages(Model model) {
