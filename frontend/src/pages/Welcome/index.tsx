@@ -18,7 +18,7 @@ export default function Welcome() {
                             LOGIN
                         </Button>
                     </Link>
-                    <Link to="/cadastro" className="block">
+                    <Link to="/register" className="block">
                         <Button>
                             CADASTRO
                         </Button>
