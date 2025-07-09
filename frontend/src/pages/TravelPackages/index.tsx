@@ -9,7 +9,7 @@ import gramadoImage from "../../assets/images/gramado-card.svg";
 
 export default function TravelPackages() {
     return (
-        <DefaultLayout flexCol innerPadding="p-16">
+        <DefaultLayout flexCol hasPadding>
             <Header />
             <div className="flex justify-end gap-3 mt-28">
                 <Button textColor="text-[#5BB8BB]" borderColor="border-[#5BB8BB]">
