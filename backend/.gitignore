@@ -1,0 +1,37 @@
+# Binários compilados
+destinara-backend
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Arquivos de teste
+*.test
+*.out
+
+# Arquivos de cobertura
+*.cover
+
+# Variáveis de ambiente
+.env
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Dependências
+vendor/
+
+# Arquivos temporários
+tmp/
+temp/ 

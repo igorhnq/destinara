@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # Banco de dados PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: destinara-postgres
+    environment:
+      POSTGRES_DB: destinara_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - destinara-network
+
+  # Backend Go
+  backend:
+    build: ./backend
+    container_name: destinara-backend
+    environment:
+      PORT: 8080
+      ENV: development
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: destinara_db
+      JWT_SECRET: your-secret-key-here
+      ALLOWED_ORIGINS: http://localhost:5173,http://localhost:3000
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - destinara-network
+    volumes:
+      - ./backend:/app
+    command: go run main.go
+
+volumes:
+  postgres_data:
+
+networks:
+  destinara-network:
+    driver: bridge 

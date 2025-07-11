@@ -1,0 +1,399 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Destinara API",
+    "description": "API para sistema de pacotes de viagem Destinara",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Destinara Team"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/api",
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Registrar novo usuário",
+        "tags": ["Autenticação"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Nome completo do usuário"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Email do usuário"
+                },
+                "password": {
+                  "type": "string",
+                  "minLength": 6,
+                  "description": "Senha do usuário (mínimo 6 caracteres)"
+                }
+              },
+              "required": ["name", "email", "password"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "description": "JWT token"
+                },
+                "user": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "409": {
+            "description": "Usuário já existe"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Fazer login",
+        "tags": ["Autenticação"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Email do usuário"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "Senha do usuário"
+                }
+              },
+              "required": ["email", "password"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "description": "JWT token"
+                },
+                "user": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas"
+          }
+        }
+      }
+    },
+    "/packages": {
+      "get": {
+        "summary": "Listar pacotes de viagem",
+        "tags": ["Pacotes de Viagem"],
+        "parameters": [
+          {
+            "name": "available",
+            "in": "query",
+            "type": "string",
+            "enum": ["true", "false"],
+            "description": "Filtrar por disponibilidade"
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "type": "string",
+            "description": "Filtrar por destino"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de pacotes",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TravelPackage"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/packages/{id}": {
+      "get": {
+        "summary": "Buscar pacote por ID",
+        "tags": ["Pacotes de Viagem"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do pacote"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pacote encontrado",
+            "schema": {
+              "$ref": "#/definitions/TravelPackage"
+            }
+          },
+          "404": {
+            "description": "Pacote não encontrado"
+          }
+        }
+      }
+    },
+    "/bookings": {
+      "get": {
+        "summary": "Listar reservas do usuário",
+        "tags": ["Reservas"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de reservas",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Booking"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar nova reserva",
+        "tags": ["Reservas"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "travel_package_id": {
+                  "type": "integer",
+                  "description": "ID do pacote de viagem"
+                },
+                "start_date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Data de início da viagem"
+                },
+                "end_date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Data de fim da viagem"
+                }
+              },
+              "required": ["travel_package_id", "start_date", "end_date"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Reserva criada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/Booking"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pacote não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "ID do usuário"
+        },
+        "name": {
+          "type": "string",
+          "description": "Nome do usuário"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email do usuário"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de criação"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de atualização"
+        }
+      }
+    },
+    "TravelPackage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "ID do pacote"
+        },
+        "name": {
+          "type": "string",
+          "description": "Nome do pacote"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descrição do pacote"
+        },
+        "destination": {
+          "type": "string",
+          "description": "Destino do pacote"
+        },
+        "price": {
+          "type": "number",
+          "format": "float",
+          "description": "Preço por dia"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Duração em dias"
+        },
+        "image_url": {
+          "type": "string",
+          "description": "URL da imagem"
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Se o pacote está disponível"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de criação"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de atualização"
+        }
+      }
+    },
+    "Booking": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "ID da reserva"
+        },
+        "user_id": {
+          "type": "integer",
+          "description": "ID do usuário"
+        },
+        "travel_package_id": {
+          "type": "integer",
+          "description": "ID do pacote de viagem"
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de início"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de fim"
+        },
+        "total_price": {
+          "type": "number",
+          "format": "float",
+          "description": "Preço total"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "confirmed", "cancelled"],
+          "description": "Status da reserva"
+        },
+        "user": {
+          "$ref": "#/definitions/User",
+          "description": "Dados do usuário"
+        },
+        "travel_package": {
+          "$ref": "#/definitions/TravelPackage",
+          "description": "Dados do pacote"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de criação"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de atualização"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT token no formato: Bearer <token>"
+    }
+  }
+} 
